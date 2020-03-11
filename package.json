@@ -1,0 +1,22 @@
+{
+  "name": "node-opcua-htmlpanel",
+  "version": "2.1.0",
+  "description": "Small HTML panel to display a OPCUA monitored variable based on node, express, socket.io  and node-opcua",
+  "main": "app.js",
+  "bin": {},
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {},
+  "repository": {},
+  "keywords": [],
+  "author": "Etienne Rossignon",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "express": "~4.17.1",
+    "node-opcua": "~2.3.0",
+    "socket.io": "~2.3.0"
+  },
+  "devDependencies": {}
+}

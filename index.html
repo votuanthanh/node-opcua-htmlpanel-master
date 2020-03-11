@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="../justgage/raphael-2.1.4.min.js"></script>
+    <script src="../justgage/justgage.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+</head>
+
+<body>
+    <!-- title -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1" style="background-color:#0404B4;">
+                <img src="../images/logo.jpg" width='74' height='75'>
+            </div>
+            <div class="col-sm-7 text-white" style="background-color:#0404B4;">
+                <h4 class="text-left font-weight-bold">HCMUT</h4>
+                <h4 class="text-left font-weight-bold">SEEDLING GARDEN MONITORING SYSTEM</h4>
+            </div>
+            <div class="col-sm-2 text-white" style="background-color:#0404B4;">
+              <div class="form-group-sm">
+                <label for="FormControlSelect1">SERVER</label>
+                <select class="form-control" id="FormControlSelect1">
+                <option>SERVER 1</option>
+                <option>SERVER 2</option>
+                <option>SERVER 3</option>
+                <option>SERVER 4</option>
+                <option>SERVER 5</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-sm-2 text-right" style="background-color:#0404B4;">
+                <h4 class="d-inline text-white align-middle" style="background-color:#0404B4;">user</h4>
+                <img src="../images/avatar.png" width='65' height='65' alt="Avatar" class="avatar">
+                <div class="dropdown d-inline">
+                    <button type="button" class="btn button-color:#0404B4; dropdown-toggle text-white" data-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-info navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+        <a class="nav-link" href="#">VƯỜN 1</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">VƯỜN 2</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">VƯỜN 3</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">VƯỜN 4</a>
+        </li>
+    </ul>
+    </nav>
+
+
+        <!-- grid structure -->
+        <div class="container-fluid">
+            <div class="row p-1">
+                <div class="col m-1" style="background-color:rgb(100,150,240);">
+                    <div id="gauge1" class="100x80px"></div>
+                    <div id="container1" style="height: 200px; min-width: 310px"></div>
+                    <div class="container">
+                        <form action="/action_page.php">
+                            <div class="form-group-sm">
+                                <label for="comment" class="text-left font-weight-bold">SET VALUE:</label>
+                                <textarea class="form-control" rows="1" id="comment" name="text"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <p id = "browseName"></p>
+                        <p id = "giatri"></p>
+                        <p id = "info"></p>
+                        <!--begin of reading var-->
+                        <script src='/socket.io/socket.io.js'></script>
+                        <script>
+                            const socket = io.connect('http://localhost:3700');
+                            socket.on('message', function (data) {
+                                document.getElementById("info").innerHTML = "nodeId= " + data.nodeId + " timestamp= "+ data.timestamp;
+                                document.getElementById("giatri").innerHTML = data.value;
+                                document.getElementById("browseName").innerHTML = data.browseName;
+                            });
+                        </script>
+                        <!--end of reading var-->
+
+                    </div>
+                </div>
+                <div class="col m-1" style="background-color:rgb(135,206,235);">
+                    <div id="gauge2" class="100x80px"></div>
+                    <div id="container2" style="height: 200px; min-width: 310px"></div>
+                    <div class="container">
+                        <form action="/action_page.php">
+                            <div class="form-group-sm">
+                                <label for="comment" class="text-left font-weight-bold">SET VALUE:</label>
+                                <textarea class="form-control" rows="1" id="comment" name="text"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col m-1" style="background-color:rgb(135,190,200);">
+                    <div id="gauge3" class="100x80px"></div>
+                    <div id="container3" style="height: 200px; min-width: 310px"></div>
+                    <div class="container">
+                            <form action="/action_page.php">
+                                <div class="form-group-sm">
+                                    <label for="comment" class="text-left font-weight-bold">SET VALUE:</label>
+                                    <textarea class="form-control" rows="1" id="comment" name="text"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+                    <script>
+                        var g = new JustGage({
+                            id: "gauge1",
+                            value: 40,
+                            min: 10,
+                            max: 50,
+                            title: "TEMPERATURE"
+                        });
+                    </script>
+                    <script>
+                            var g = new JustGage({
+                                id: "gauge2",
+                                value: 400,
+                                min: 0,
+                                max: 1000,
+                                title: "BRIGHTNESS"
+                            });
+                    </script>
+                    <script>
+                        var g = new JustGage({
+                            id: "gauge3",
+                            value: 70,
+                            min: 0,
+                            max: 100,
+                            title: "HUMANITY"
+                        });
+
+                    </script>
+
+<!--create trend -->
+
+                    <script>
+                        Highcharts.stockChart('container1', {
+                            chart: {
+                                events: {
+                                    load: function() {
+
+                                        // set up the updating of the chart each second
+                                        var series = this.series[0];
+                                        setInterval(function() {
+                                            var x = (new Date()).getTime(), // current time
+                                                y = Math.round(Math.random() * 100);
+                                            series.addPoint([x, y], true, true);
+                                        }, 1000);
+                                    }
+                                }
+                            },
+
+                            time: {
+                                useUTC: false
+                            },
+
+                            rangeSelector: {
+                                buttons: [{
+                                    count: 1,
+                                    type: 'minute',
+                                    text: '1M'
+                                }, {
+                                    count: 5,
+                                    type: 'minute',
+                                    text: '5M'
+                                }, {
+                                    type: 'all',
+                                    text: 'All'
+                                }],
+                                inputEnabled: false,
+                                selected: 0
+                            },
+
+                            title: {
+                                text: 'Live random data 1'
+                            },
+
+                            exporting: {
+                                enabled: false
+                            },
+
+                            series: [{
+                                name: 'Random data',
+                                data: (function() {
+                                    // generate an array of random data
+                                    var data = [],
+                                        time = (new Date()).getTime(),
+                                        i;
+
+                                    for (i = -999; i <= 0; i += 1) {
+                                        data.push([
+                                            time + i * 1000,
+                                            Math.round(Math.random() * 100)
+                                        ]);
+                                    }
+                                    return data;
+                                }())
+                            }]
+                        });
+                    </script>
+
+<!--create trend  -->
+                        <script>
+                            Highcharts.stockChart('container3', {
+                                chart: {
+                                    events: {
+                                        load: function() {
+
+                                            // set up the updating of the chart each second
+                                            var series = this.series[0];
+                                            setInterval(function() {
+                                                var x = (new Date()).getTime(), // current time
+                                                    y = Math.round(Math.random() * 100);
+                                                series.addPoint([x, y], true, true);
+                                            }, 1000);
+                                        }
+                                    }
+                                },
+
+                                time: {
+                                    useUTC: false
+                                },
+
+                                rangeSelector: {
+                                    buttons: [{
+                                        count: 1,
+                                        type: 'minute',
+                                        text: '1M'
+                                    }, {
+                                        count: 5,
+                                        type: 'minute',
+                                        text: '5M'
+                                    }, {
+                                        type: 'all',
+                                        text: 'All'
+                                    }],
+                                    inputEnabled: false,
+                                    selected: 0
+                                },
+
+                                title: {
+                                    text: 'Live random data 3'
+                                },
+
+                                exporting: {
+                                    enabled: false
+                                },
+
+                                series: [{
+                                    name: 'Random data',
+                                    data: (function() {
+                                        // generate an array of random data
+                                        var data = [],
+                                            time = (new Date()).getTime(),
+                                            i;
+
+                                        for (i = -999; i <= 0; i += 1) {
+                                            data.push([
+                                                time + i * 1000,
+                                                Math.round(Math.random() * 100)
+                                            ]);
+                                        }
+                                        return data;
+                                    }())
+                                }]
+                            });
+                        </script>
+
+<!--create trend -->
+                    <script>
+                        Highcharts.stockChart('container2', {
+                            chart: {
+                                events: {
+                                    load: function() {
+
+                                        // set up the updating of the chart each second
+                                        var series = this.series[0];
+                                        setInterval(function() {
+                                            var x = (new Date()).getTime(), // current time
+                                                y = Math.round(Math.random() * 100);
+                                            series.addPoint([x, y], true, true);
+                                        }, 1000);
+                                    }
+                                }
+                            },
+
+                            time: {
+                                useUTC: false
+                            },
+
+                            rangeSelector: {
+                                buttons: [{
+                                    count: 1,
+                                    type: 'minute',
+                                    text: '1M'
+                                }, {
+                                    count: 5,
+                                    type: 'minute',
+                                    text: '5M'
+                                }, {
+                                    type: 'all',
+                                    text: 'All'
+                                }],
+                                inputEnabled: false,
+                                selected: 0
+                            },
+
+                            title: {
+                                text: 'Live random data 2'
+                            },
+
+                            exporting: {
+                                enabled: false
+                            },
+
+                            series: [{
+                                name: 'Random data',
+                                data: (function() {
+                                    // generate an array of random data
+                                    var data = [],
+                                        time = (new Date()).getTime(),
+                                        i;
+
+                                    for (i = -999; i <= 0; i += 1) {
+                                        data.push([
+                                            time + i * 1000,
+                                            Math.round(Math.random() * 100)
+                                        ]);
+                                    }
+                                    return data;
+                                }())
+                            }]
+                        });
+                    </script>
+
+<!--socket io on -->
+                    <script>
+                    let gauge;
+                    socket.on('message', function (data) {
+                        gauge.value = data.value;
+                    });
+                    </script>
+
+</html>
