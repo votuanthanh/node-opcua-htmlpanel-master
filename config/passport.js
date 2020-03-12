@@ -120,6 +120,7 @@ module.exports = function(passport) {
                         // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
                     } else {
                         var user = req.user;
+                        user.local.name = name;
                         user.local.email = email;
                         user.local.password = user.generateHash(password);
                         user.save(function (err) {
